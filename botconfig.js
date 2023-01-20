@@ -31,7 +31,7 @@ module.exports = {
   Lavalink: {
     id: "Main", //- Used for indentifier. You can set this to whatever you want.
     host: process.env.Lavalink_Host || "", //- The host name or IP of the lavalink server.
-    port: process.env.Lavalink_Port || 80, // The port that lavalink is listening to. This must be a number!
+    port: process.env.Lavalink_Port ? parseInt(process.env.Lavalink_Port) : 80, // The port that lavalink is listening to. This must be a number!
     pass: process.env.Lavalink_Pass || "", //- The password of the lavalink server.
     secure: !!process.env.Lavalink_SSL, // Set this to true if the lavalink uses SSL. if not set it to false.
     retryAmount: 200, //- The amount of times to retry connecting to the node if connection got dropped.
