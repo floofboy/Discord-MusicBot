@@ -21,6 +21,7 @@ class DiscordMusicBot extends Client {
   constructor(props) {
     super(props);
 
+    if (process.env.MUSIC_BOT_STARTED) return;
     this.commands = new Collection();
     this.connections = new Map();
     this.CommandsRan = 0;
@@ -187,6 +188,8 @@ class DiscordMusicBot extends Client {
         client.channels.cache.get(player.textChannel).send(QueueEmbed);
         if (!this.botconfig["24/7"]) player.destroy();
       });
+
+    process.env["MUSIC_BOT_STARTED"] = "true";
   }
 
   LoadCommands() {
@@ -255,6 +258,7 @@ class DiscordMusicBot extends Client {
   }
 
   build() {
+    if (process.env.MUSIC_BOT_STARTED) return;
     this.login(this.botconfig.Token);
     if (this.botconfig.ExpressServer) {
       this.http.listen(process.env.PORT || this.botconfig.Port, () =>
